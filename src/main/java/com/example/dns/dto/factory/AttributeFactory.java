@@ -6,14 +6,17 @@ import com.example.dns.dto.factory.attributeType.*;
 import com.example.dns.entity.AttributeValue;
 import com.example.dns.entity.Device;
 import com.example.dns.entity.Model;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Locale;
 
-
+@Slf4j
 public class AttributeFactory {
     public static List<AttributeValue> createAttribute(String type, AttributeDto attributeDto, Model device) {
-        switch(type) {
+        log.info("Factory in process create EAV");
+        switch(type.toLowerCase()) {
             case "телевизор":
                 return new TelevisionAttributes().createAttributeValue(attributeDto, device);
             case "пылесос":

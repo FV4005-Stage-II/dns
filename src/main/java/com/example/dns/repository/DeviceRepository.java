@@ -2,7 +2,6 @@ package com.example.dns.repository;
 
 import com.example.dns.entity.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -10,8 +9,6 @@ import java.util.List;
 
 
 public interface DeviceRepository extends JpaRepository<Device, Long> {
-
-//    Device findFirstByManufacturerCountryIgnoreCaseAndManufacturerCompanyIgnoreCaseAndNameIgnoreCase(String manufacturerCountry, String manufacturerCompany, String name);
 
     @Query("SELECT d FROM Device d" +
             " WHERE LOWER(d.manufacturerCountry) = LOWER(:manufacturerCountry) " +
@@ -22,7 +19,4 @@ public interface DeviceRepository extends JpaRepository<Device, Long> {
             @Param("manufacturerCompany") String manufacturerCompany,
             @Param("name") String name);
 
-
-//    @Query("SELECT d FROM Device d WHERE LOWER(d.manufacturerCountry) = LOWER(:manufacturerCountry) AND LOWER(d.manufacturerCompany) = LOWER(:manufacturerCompany) AND LOWER(d.name) = LOWER(:name)")
-//    Device findByCountryAndCompanyAndName(String manufacturerCountry, String manufacturerCompany, String name);
 }

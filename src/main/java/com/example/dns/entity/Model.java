@@ -21,8 +21,9 @@ public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @UniqueConstraint()
+
     private String name;
+    @Column(unique = true)
     private String serialNumber;
     private String color;
     private String size;
