@@ -26,8 +26,8 @@ public class ModelController {
             content = @Content(mediaType = "application/json",
                     examples = @ExampleObject(name = "Example", value =
                             "{" +
-                                    "  \"manufacturerCountry\": \"Россия\"," +
-                                    "  \"manufacturerCompany\": \"Байкал\"," +
+                                    "  \"manufacturerCountry\": \"Байкал\"," +
+                                    "  \"manufacturerCompany\": \"Россия\"," +
                                     "  \"typeName\": \"пылесос\"," +
                                     "  \"name\": \"Модель X\"," +
                                     "  \"serialNumber\": \"123456789\"," +
@@ -38,21 +38,21 @@ public class ModelController {
                                     "  \"available\": true," +
                                     "  \"attributeDto\":" +
                                     "{" +
-                                    "  \"technology\": \"пылесос\"," +
+                                    "  \"technology\": \"Oled\"," +
                                     "  \"dustbinVolume\": \"2 литра\"," +
                                     "  \"numberOfModes\": 3," +
                                     "  \"numberOfDoors\": 4," +
                                     "  \"compressorType\": \"винтовой\"," +
                                     "  \"memory\": \"8 ГБ\"," +
-                                    "  \"numberOfChambers\": 2," +
+                                    "  \"numberOfCamera\": 2," +
                                     "  \"processorType\": \"многоядерный\"" +
                                     "}" +
                                     "}")
             )
     ))
     public ResponseEntity<?> addDevice(@RequestBody ModelDto modelDto) {
-        //modelService.addModel(modelDto);
-        System.out.println(modelDto.getAttributeDto().getDustbinVolume());
+        modelService.addModel(modelDto);
+
         return new ResponseEntity<>(modelDto, HttpStatus.OK);
     }
 

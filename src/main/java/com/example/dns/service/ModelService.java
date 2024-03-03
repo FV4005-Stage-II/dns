@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -27,10 +28,10 @@ public class ModelService {
     @Transactional
     public void addModel(ModelDto modelDto) {
         Device device = deviceRepository.
-                findByCountryAndCompanyAndName(
+                findFirstByCountryAndCompanyAndName(
                         modelDto.getManufacturerCountry(),
                         modelDto.getManufacturerCompany(),
-                        modelDto.getTypeName());
+                        modelDto.getTypeName()).get(0);
 
         modelRepository.save(Model.builder().
                 name(modelDto.getName()).
@@ -47,7 +48,7 @@ public class ModelService {
 
         attributeValueRepository.saveAll(
                 AttributeFactory.createAttribute(device.getName(),
-                        modelDto.getAttributeDto()));
+                        modelDto.getAttributeDto(), modelRepository.findByName(modelDto.getName())));
 
 
     }

@@ -2,8 +2,10 @@ package com.example.dns.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
@@ -13,11 +15,13 @@ import java.util.List;
 @Data
 @Entity
 @Table(name="model")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @UniqueConstraint()
     private String name;
     private String serialNumber;
     private String color;

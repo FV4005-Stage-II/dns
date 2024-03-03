@@ -2,8 +2,10 @@ package com.example.dns.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import javax.persistence.*;
 @Data
 @Builder
 @Table(name="attribute_value")
+@AllArgsConstructor
+@NoArgsConstructor
 public class AttributeValue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

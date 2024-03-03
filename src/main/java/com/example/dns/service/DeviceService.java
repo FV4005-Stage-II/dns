@@ -2,16 +2,13 @@ package com.example.dns.service;
 
 
 import com.example.dns.dto.DeviceDto;
-import com.example.dns.entity.AttributeValue;
 import com.example.dns.entity.Device;
 import com.example.dns.repository.AttributeValueRepository;
 import com.example.dns.repository.DeviceRepository;
 import com.example.dns.repository.ModelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 
 @Service

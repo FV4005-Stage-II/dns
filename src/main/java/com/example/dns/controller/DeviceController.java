@@ -20,7 +20,6 @@ public class DeviceController {
 
     private final DeviceService deviceService;
 
-
     @PostMapping("/add-device")
     @Operation(summary = "Добавление новой техники", requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(mediaType = "application/json",
