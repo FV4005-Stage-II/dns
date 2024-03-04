@@ -5,6 +5,7 @@ package com.example.dns.controller;
 import com.example.dns.dto.DeviceDto;
 import com.example.dns.dto.DeviceModelDto;
 import com.example.dns.dto.ModelDto;
+import com.example.dns.entity.Model;
 import com.example.dns.service.ModelService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,11 +14,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -98,4 +101,8 @@ public class ModelController {
         return new ResponseEntity<>(deviceModelDto, HttpStatus.OK);
     }
 
+    @GetMapping("get-all-models")
+    public List<Model> getAllModels() {
+        return modelService.getAllModels();
+    }
 }

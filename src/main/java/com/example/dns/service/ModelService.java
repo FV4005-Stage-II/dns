@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -76,5 +77,10 @@ public class ModelService {
         log.info("Сохранение модели");
         log.info("Сохранение атрибутов");
         // select * from device join model on device.id = model.device_id join attribute_value on attribute_value.model_id = model.id;
+    }
+
+    public List<Model> getAllModels() {
+        return modelRepository.findAllModelsByPriceRange(10,200);
+        //return modelRepository.findAllModels();
     }
 }

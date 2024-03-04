@@ -67,6 +67,10 @@
 			<version>20230618</version>
 		</dependency>
 
+<!--		<dependency>-->
+<!--			<groupId>org.flywaydb</groupId>-->
+<!--			<artifactId>flyway-core</artifactId>-->
+<!--		</dependency>-->
 
 	</dependencies>
 
