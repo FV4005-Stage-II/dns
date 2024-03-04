@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 public class ModelController {
@@ -52,7 +54,7 @@ public class ModelController {
                                     "}")
             )
     ))
-    public ResponseEntity<?> addModel(@RequestBody ModelDto modelDto) {
+    public ResponseEntity<?> addModel(@Valid @RequestBody ModelDto modelDto) {
         modelService.addModel(modelDto);
         return new ResponseEntity<>(modelDto, HttpStatus.OK);
     }
@@ -91,7 +93,7 @@ public class ModelController {
                     "}")
             )
     ))
-    public ResponseEntity<?> addFullModel(@RequestBody DeviceModelDto deviceModelDto) {
+    public ResponseEntity<?> addFullModel(@Valid @RequestBody DeviceModelDto deviceModelDto) {
         modelService.addFullModel(deviceModelDto.getModelDto(), deviceModelDto.getDeviceDto());
         return new ResponseEntity<>(deviceModelDto, HttpStatus.OK);
     }

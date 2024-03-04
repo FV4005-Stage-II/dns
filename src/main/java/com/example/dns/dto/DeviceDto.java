@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.json.JSONObject;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 
 @Schema(description = "сущность техника")
@@ -12,18 +14,23 @@ public class DeviceDto {
 
 
     @Schema(description = "название техники", example = "Пылесос", required = true)
+    @NotBlank(message = "name не должно быть пустым полем")
     private String name;
 
     @Schema(description = "Страна производителя", example = "Россия", required = true)
+    @NotBlank(message = "manufacturerCountry не должно быть пустым полем")
     private String manufacturerCountry;
 
     @Schema(description = "Страна компании", example = "Байкал", required = true)
+    @NotBlank(message = "manufacturerCompany не должно быть пустым полем")
     private String manufacturerCompany;
 
     @Schema(description = "Доступность онлайн заказа", example = "true", required = true)
+    @NotNull(message = "onlineOrderAvailable не должно быть пустым полем")
     private boolean onlineOrderAvailable;
 
     @Schema(description = "Доступность оплаты в рассрочку", example = "true", required = true)
+    @NotNull(message = "installmentAvailable не должно быть пустым полем")
     private boolean installmentAvailable;
 
 

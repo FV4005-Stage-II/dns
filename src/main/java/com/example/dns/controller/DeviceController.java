@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 public class DeviceController {
@@ -21,16 +23,17 @@ public class DeviceController {
     private final DeviceService deviceService;
 
     @PostMapping("/add-device")
-    @Operation(summary = "Добавление новой техники", requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+    @Operation(summary = "Добавление новой техники",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(mediaType = "application/json",
-                    examples = @ExampleObject(name = "Example", value = "{\"manufacturerCompany\":\"String\"," +
-                                                                        "\"onlineOrderAvailable\":true," +
-                                                                        "\"name\":\"String\"," +
-                                                                        "\"installmentAvailable\":true," +
-                                                                        "\"manufacturerCountry\":\"String\"}")
+            examples = @ExampleObject(name = "Example", value = "{\"manufacturerCompany\":\"String\"," +
+                                                                "\"onlineOrderAvailable\":true," +
+                                                                "\"name\":\"String\"," +
+                                                                "\"installmentAvailable\":true," +
+                                                                "\"manufacturerCountry\":\"String\"}")
             )
     ))
-    public ResponseEntity<?> addDevice(@RequestBody DeviceDto deviceDto) {
+    public ResponseEntity<?> addDevice(@Valid @RequestBody DeviceDto deviceDto) {
         deviceService.addDevice(deviceDto);
         return new ResponseEntity<>(deviceDto, HttpStatus.OK);
     }
