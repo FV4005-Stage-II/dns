@@ -1,6 +1,7 @@
 package com.example.dns.service;
 
 
+import com.example.dns.dto.DeviceDto;
 import com.example.dns.dto.ModelDto;
 import com.example.dns.dto.factory.AttributeFactory;
 import com.example.dns.entity.Device;
@@ -23,7 +24,8 @@ public class ModelService {
     private final ModelRepository modelRepository;
     private final DeviceRepository deviceRepository;
     private final AttributeValueRepository attributeValueRepository;
-    
+
+    private final DeviceService deviceService;
     @Transactional
     public void addModel(ModelDto modelDto) {
         Device device = deviceRepository.
@@ -32,21 +34,46 @@ public class ModelService {
                         modelDto.getManufacturerCompany(),
                         modelDto.getTypeName()).get(0);
         log.info("Получение техники");
-        modelRepository.save(Model.builder().
-                name(modelDto.getName()).
-                serialNumber(modelDto.getSerialNumber()).
-                color(modelDto.getColor()).
-                size(modelDto.getSize()).
-                price(modelDto.getPrice()).
-                category(modelDto.getCategory()).
-                available(modelDto.isAvailable()).
-                device(device).
-                attributeValues(new ArrayList<>()).
-                build());
-        log.info("Сохранение модели");
+
         attributeValueRepository.saveAll(
                 AttributeFactory.createAttribute(device.getName(),
-                        modelDto.getAttributeDto(), modelRepository.findBySerialNumber(modelDto.getSerialNumber())));
+                        modelDto.getAttributeDto(),
+                        modelRepository.save(Model.builder().
+                                name(modelDto.getName()).
+                                serialNumber(modelDto.getSerialNumber()).
+                                color(modelDto.getColor()).
+                                size(modelDto.getSize()).
+                                price(modelDto.getPrice()).
+                                category(modelDto.getCategory()).
+                                available(modelDto.isAvailable()).
+                                device(device).
+                                attributeValues(new ArrayList<>()).
+                                build())));
+        log.info("Сохранение модели");
+        log.info("Сохранение атрибутов");
+        // select * from device join model on device.id = model.device_id join attribute_value on attribute_value.model_id = model.id;
+    }
+
+    @Transactional
+    public void addFullModel(ModelDto modelDto, DeviceDto deviceDto) {
+        Device device = deviceService.addDevice(deviceDto);
+        log.info("Получение и сохранение техники");
+
+        attributeValueRepository.saveAll(
+                AttributeFactory.createAttribute(device.getName(),
+                        modelDto.getAttributeDto(),
+                        modelRepository.save(Model.builder().
+                                name(modelDto.getName()).
+                                serialNumber(modelDto.getSerialNumber()).
+                                color(modelDto.getColor()).
+                                size(modelDto.getSize()).
+                                price(modelDto.getPrice()).
+                                category(modelDto.getCategory()).
+                                available(modelDto.isAvailable()).
+                                device(device).
+                                attributeValues(new ArrayList<>()).
+                                build())));
+        log.info("Сохранение модели");
         log.info("Сохранение атрибутов");
         // select * from device join model on device.id = model.device_id join attribute_value on attribute_value.model_id = model.id;
     }

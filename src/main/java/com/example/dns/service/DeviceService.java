@@ -19,8 +19,8 @@ public class DeviceService {
     private final AttributeValueRepository attributeValueRepository;
 
 
-    public void addDevice(DeviceDto deviceDto) {
-        deviceRepository.save(Device.builder().name(deviceDto.getName())
+    public Device addDevice(DeviceDto deviceDto) {
+        return deviceRepository.save(Device.builder().name(deviceDto.getName())
                 .manufacturerCompany(deviceDto.getManufacturerCompany())
                 .manufacturerCountry(deviceDto.getManufacturerCountry())
                 .onlineOrderAvailable(deviceDto.isOnlineOrderAvailable())
