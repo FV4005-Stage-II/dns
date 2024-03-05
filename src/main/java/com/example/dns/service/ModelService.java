@@ -2,6 +2,8 @@ package com.example.dns.service;
 
 
 import com.example.dns.dto.DeviceDto;
+import com.example.dns.dto.DeviceModelDto;
+import com.example.dns.dto.DeviceModelForFilter;
 import com.example.dns.dto.ModelDto;
 import com.example.dns.dto.factory.AttributeFactory;
 import com.example.dns.entity.Device;
@@ -9,6 +11,7 @@ import com.example.dns.entity.Model;
 import com.example.dns.repository.AttributeValueRepository;
 import com.example.dns.repository.DeviceRepository;
 import com.example.dns.repository.ModelRepository;
+import com.example.dns.repository.ModelRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,7 @@ public class ModelService {
     private final ModelRepository modelRepository;
     private final DeviceRepository deviceRepository;
     private final AttributeValueRepository attributeValueRepository;
+    private final ModelRepositoryCustom modelRepositoryCustom;
 
     private final DeviceService deviceService;
     @Transactional
@@ -79,8 +83,45 @@ public class ModelService {
         // select * from device join model on device.id = model.device_id join attribute_value on attribute_value.model_id = model.id;
     }
 
-    public List<Model> getAllModels() {
-        return modelRepository.findAllModelsByPriceRange(10,200);
-        //return modelRepository.findAllModels();
+    public List<Model> getAllModelsByCrytery(DeviceModelForFilter deviceModelForFilter) {
+        return modelRepository.findModelsByCriteria(
+                deviceModelForFilter.getName(),
+                deviceModelForFilter.getSerialNumber(),
+                deviceModelForFilter.getColor(),
+                deviceModelForFilter.getSize(),
+                deviceModelForFilter.getCategory(),
+                deviceModelForFilter.isAvailable(),
+                deviceModelForFilter.getTypeName(),
+                deviceModelForFilter.getManufacturerCountry(),
+                deviceModelForFilter.getManufacturerCompany(),
+                deviceModelForFilter.isOnlineOrderAvailable(),
+                deviceModelForFilter.isInstallmentAvailable(),
+                deviceModelForFilter.getMinPrice(),
+                deviceModelForFilter.getMaxPrice()
+        );
     }
+
+//    {
+//        "manufacturerCountry": "Россия",
+//            "manufacturerCompany": "Байкал",
+//            "onlineOrderAvailable": null,
+//            "installmentAvailable": null,
+//            "typeName": "Пылесос",
+//            "name": "Модель X",
+//            "serialNumber": null,
+//            "color": "Черный",
+//            "size": "XL",
+//            "category": "бюджетный сегмент",
+//            "available": true,
+//            "maxPrice": 1000,
+//            "minPrice": 10
+//    }
+
+//    public List<Model> getAllModels() {
+//        return modelRepository.findAllModelsByPriceRange(10,200);
+//    }
+//
+//    public List<Model> getAllModelsCustom(ModelDto modelDto) {
+//        return modelRepositoryCustom.findModelsByCriteria();
+//    }
 }
