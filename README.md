@@ -14,4 +14,5 @@
 
 ### Пример работы
 http://localhost:8080/swagger-ui/index.html
-![image](https://github.com/FV4005-Stage-II/dns/assets/100275671/cb77b104-40e9-45fa-a44f-3ccdc8e5d61e)
+![image](https://github.com/FV4005-Stage-II/dns/assets/100275671/625f712f-dccb-4ab0-a4ef-eb3ddf5fa7f4)
+
