@@ -31,7 +31,8 @@ public class ModelService {
     private final ModelRepositoryCustom modelRepositoryCustom;
 
     private final DeviceService deviceService;
-    @Transactional
+
+
     public void addModel(ModelDto modelDto) {
         Device device = deviceRepository.
                 findFirstByCountryAndCompanyAndName(
@@ -59,7 +60,6 @@ public class ModelService {
         // select * from device join model on device.id = model.device_id join attribute_value on attribute_value.model_id = model.id;
     }
 
-    @Transactional
     public void addFullModel(ModelDto modelDto, DeviceDto deviceDto) {
         Device device = deviceService.addDevice(deviceDto);
         log.info("Получение и сохранение техники");

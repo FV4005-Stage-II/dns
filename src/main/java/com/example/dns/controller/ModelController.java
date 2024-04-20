@@ -102,52 +102,52 @@ public class ModelController {
         return new ResponseEntity<>(deviceModelDto, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get-with-filter-model",
-                consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Получение моделей с фильтром",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            content = @Content(mediaType = "application/json",
-                    examples = @ExampleObject(name = "Example", value =
-                            "{" +
-                                    "\"deviceDto\": {" +
-                                    "    \"manufacturerCompany\": \"Байкал\"," +
-                                    "    \"onlineOrderAvailable\": true," +
-                                    "    \"name\": \"Пылесос\"," +
-                                    "    \"installmentAvailable\": true," +
-                                    "    \"manufacturerCountry\": \"Россия\"" +
-                                    "}," +
-                                    "\"modelDto\": {" +
-                                    "    \"name\": \"Модель X\"," +
-                                    "    \"serialNumber\": \"123456789\"," +
-                                    "    \"color\": \"Черный\"," +
-                                    "    \"size\": \"XL\"," +
-                                    "    \"price\": 100.50," +
-                                    "    \"category\": \"бюджетный сегмент\"," +
-                                    "    \"available\": true," +
-                                    "    \"attributeDto\": {" +
-                                    "        \"technology\": \"Oled\"," +
-                                    "        \"dustbinVolume\": \"2 литра\"," +
-                                    "        \"numberOfModes\": 3," +
-                                    "        \"numberOfDoors\": 4," +
-                                    "        \"compressorType\": \"винтовой\"," +
-                                    "        \"memory\": \"8 ГБ\"," +
-                                    "        \"numberOfCamera\": 2," +
-                                    "        \"processorType\": \"многоядерный\"" +
-                                    "    }" +
-                                    "}" +
-                                    "}")
-            )
-    ))
-    public ResponseEntity<?> getWithFilterModels(@Valid @RequestBody DeviceModelDto deviceModelDto) {
-        modelService.addFullModel(deviceModelDto.getModelDto(), deviceModelDto.getDeviceDto());
-        return new ResponseEntity<>(deviceModelDto, HttpStatus.OK);
-    }
-
-
-    @PostMapping("/get-all-models")
-    public  ResponseEntity<?> getAllModels(@Valid @RequestBody DeviceModelForFilter deviceModelForFilter) {
-        if(deviceModelForFilter.getMinPrice() > deviceModelForFilter.getMaxPrice())
-            return new ResponseEntity<>("неверая максимальная и минимальная цена",HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(modelService.getAllModelsByCrytery(deviceModelForFilter), HttpStatus.OK);
-    }
+//    @GetMapping(value = "/get-with-filter-model",
+//                consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @Operation(summary = "Получение моделей с фильтром",
+//            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+//            content = @Content(mediaType = "application/json",
+//                    examples = @ExampleObject(name = "Example", value =
+//                            "{" +
+//                                    "\"deviceDto\": {" +
+//                                    "    \"manufacturerCompany\": \"Байкал\"," +
+//                                    "    \"onlineOrderAvailable\": true," +
+//                                    "    \"name\": \"Пылесос\"," +
+//                                    "    \"installmentAvailable\": true," +
+//                                    "    \"manufacturerCountry\": \"Россия\"" +
+//                                    "}," +
+//                                    "\"modelDto\": {" +
+//                                    "    \"name\": \"Модель X\"," +
+//                                    "    \"serialNumber\": \"123456789\"," +
+//                                    "    \"color\": \"Черный\"," +
+//                                    "    \"size\": \"XL\"," +
+//                                    "    \"price\": 100.50," +
+//                                    "    \"category\": \"бюджетный сегмент\"," +
+//                                    "    \"available\": true," +
+//                                    "    \"attributeDto\": {" +
+//                                    "        \"technology\": \"Oled\"," +
+//                                    "        \"dustbinVolume\": \"2 литра\"," +
+//                                    "        \"numberOfModes\": 3," +
+//                                    "        \"numberOfDoors\": 4," +
+//                                    "        \"compressorType\": \"винтовой\"," +
+//                                    "        \"memory\": \"8 ГБ\"," +
+//                                    "        \"numberOfCamera\": 2," +
+//                                    "        \"processorType\": \"многоядерный\"" +
+//                                    "    }" +
+//                                    "}" +
+//                                    "}")
+//            )
+//    ))
+//    public ResponseEntity<?> getWithFilterModels(@Valid @RequestBody DeviceModelDto deviceModelDto) {
+//        modelService.addFullModel(deviceModelDto.getModelDto(), deviceModelDto.getDeviceDto());
+//        return new ResponseEntity<>(deviceModelDto, HttpStatus.OK);
+//    }
+//
+//
+//    @PostMapping("/get-all-models")
+//    public  ResponseEntity<?> getAllModels(@Valid @RequestBody DeviceModelForFilter deviceModelForFilter) {
+//        if(deviceModelForFilter.getMinPrice() > deviceModelForFilter.getMaxPrice())
+//            return new ResponseEntity<>("неверая максимальная и минимальная цена",HttpStatus.BAD_REQUEST);
+//        return new ResponseEntity<>(modelService.getAllModelsByCrytery(deviceModelForFilter), HttpStatus.OK);
+//    }
 }
